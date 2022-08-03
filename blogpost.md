@@ -1,11 +1,20 @@
 # SRNCA blogpost
 
-**An analysis on **
+**An analysis on**
 
 ## Introduction
 We see patterns in nature everywhere-  plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
+| | | |
+| ------------- | ------------- | ------------- |
+|![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true)|![image](https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png)|![image](https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png)|
+|Belousov-Zhabotinsky reaction|Giraffe fur pattern|Haworthia leaf pattern|
+|![image](https://user-images.githubusercontent.com/103375681/182693972-17acd807-55c3-44e6-bcda-2099884fea96.png)|![image](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![image](https://user-images.githubusercontent.com/103375681/182693201-0387786a-0c1c-467b-af2b-7df1da2e842a.png)|
+|Snakeplant leaf pattern|Gasteria leaf pattern|Cheetah fur pattern|
 
-[![](file:///Users/tanisha/Downloads/8wMA.gif)]
+
+
+
+
 
 One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene, like a detailed engineering blueprint followed precisely to build a living machine. However, the information storage requirements for this approach would be massive; consider the difference in file size between an uncompressed tif file (where every pixel is described exactly) and a compressed jpg or even a png file. 
 
@@ -112,14 +121,9 @@ But, not so much for generating a “bad” pattern with a mean resting of .5. H
 With further investigation into these and other statistics models in the future, it might be possible to confidently identify what clusters of parameters behave similarly. 
 
 ## Performance relationships across different textures
-Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. Combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too.
-
-Back to the 10 randomly generated sets of hyperparameters tested on each of the four textures, according to the graph below of the roundleaf result (final loss) versus the other textures’ final results for the same set.
-
-![image](https://user-images.githubusercontent.com/103375681/182501434-93db2b14-7d33-4839-9224-974fc564a2ec.png)
-
+Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. The way I tested this relationship was by generating 10 random sets of hyperparameters and testing them on all the four textures. I found that combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too. 
 ### Hyperparameter set 5
-For example, this set of hyperparameters (set 5) yielded great results across the different target textures:):
+For example, my fifth set yielded great results across the different target textures:):
 
 | Parameter | number |
 |---|---|
@@ -137,7 +141,7 @@ For example, this set of hyperparameters (set 5) yielded great results across th
 |![image](https://user-images.githubusercontent.com/103375681/182501845-3fe599cd-56d9-486b-bef9-72668f3aed8c.png)|![image](https://user-images.githubusercontent.com/103375681/182501852-877dc531-4e10-411f-a93f-09a4392eaf93.png)|
 
 ### Hyperparameter set 8
-And this set of hyperparameters (set 8) yielded horrible results across the different target textures:
+And my eight set yielded horrible results across the different target textures:
 
 | Parameter | number |
 |---|---|
@@ -154,7 +158,14 @@ And this set of hyperparameters (set 8) yielded horrible results across the diff
 |![image](https://user-images.githubusercontent.com/103375681/182501909-6a10f866-e607-4af2-a2a3-5b8c156aa49e.png)|![image](https://user-images.githubusercontent.com/103375681/182501919-36e7dcde-60c5-433c-a843-cc63ea7a82e5.png)|
 |![image](https://user-images.githubusercontent.com/103375681/182501938-30c78ca5-230b-4911-a078-c158ea8d1ed3.png)|![image](https://user-images.githubusercontent.com/103375681/182501945-b2477e2a-b411-4d08-b0ae-29b9b1dea8d1.png)|
 
-The relationship of performance across different textures suggests that there is a set of values for the hyperparameters that optimizes the algorithm. A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
+
+**At the end, I graphed the relationship between the roundleaf final loss versus other other textures' final losses for each of the ten sets of parameters.**
+
+![image](https://user-images.githubusercontent.com/103375681/182501434-93db2b14-7d33-4839-9224-974fc564a2ec.png)
+
+It showed  a positive, linear correlation, meaning that as the set yeilded a higher loss (a worse pattern) for the roundleaf texture, it would also yeild a higher loss for the other textures, and vice versa. It was also interesting that each distribution had an increasing spread as the loss increased. This makes sense because as set yeilds a less and less acurate result (increasing loss) for the roundleaf texture, there are more possibilities of textures to be generated which increases the range of possibile outcomes for the other textures. Finally, even with only ten samples, each of the relationships seemed to have a y-intercept of approximately 0. This is exiting because it suggests that a hyperparameter set that is extremley close to zero for one texture, would likley also minimize the loss for other textures too, and therefore that there is an optimal set of hyperparameters.   
+
+A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
 
 ## Conclusion
 It was awesome to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. This model allows us to find a ruleset for any texture imaginable, and it is exciting to think about how well it would work once we find the way to optimize it. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. 
