@@ -144,6 +144,15 @@ Learning rate = 1e-05
 |![image](https://user-images.githubusercontent.com/103375681/182501909-6a10f866-e607-4af2-a2a3-5b8c156aa49e.png)|![image](https://user-images.githubusercontent.com/103375681/182501919-36e7dcde-60c5-433c-a843-cc63ea7a82e5.png)|
 |![image](https://user-images.githubusercontent.com/103375681/182501938-30c78ca5-230b-4911-a078-c158ea8d1ed3.png)|![image](https://user-images.githubusercontent.com/103375681/182501945-b2477e2a-b411-4d08-b0ae-29b9b1dea8d1.png)|
 
+The relationship of performance across different textures suggests that there is a set of values for the hyperparameters that optimizes the algorithm. A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
+
+## Conclusion
+It was awesome to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. This model allows us to find a ruleset for any texture imaginable, and it is exciting to think about how well it would work once we find the way to optimize it. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. 
+
+## Sources
+
+
+
 
 
 
