@@ -1,14 +1,13 @@
 # SRNCA blogpost
 
-##### **Stars make text bold, maybe put description here**
+**Stars make text bold, maybe put description here**
 
 ## Introduction
 We see patterns in nature everywhere-  plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
 
-PICS/GIFS OF TEXTURES
+One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene, like a detailed engineering blueprint followed precisely to build a living machine. However, the information storage requirements for this approach would be massive; consider the difference in file size between an uncompressed tif file (where every pixel is described exactly) and a compressed jpg or even a png file. 
 
-One way to make a conclusion on how certain natural patterns arise is to analyze the chemicals inside organisms with these patterns to see how they interact with each other. However, this would be a very difficult process because all the chemicals would need to be collected and tested properly against each other. Plus, this would only work on a specific scope: chemical patterns arising in organisms. 
-[MAKE MORE NAIVE]
+In the case of the compressed file types, the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. Instead we have the encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens) in the genome as a more viable explanation of organismal patterning and development. 
 
 Mathematician Alan Turing came up with another way: a model, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a system, which is called a “reaction-diffusion model” with two substances, an activator and an inhibitor, that diffuse throughout a system. The activator substance activates other cells in the system, activating more activators and inhibitors, meanwhile the inhibitor substance prevents further activation. The two substances interact with each other and eventually a stable pattern emerges. ##EXPLAIN MORE?  
 ##Turing didn't do this
@@ -96,14 +95,14 @@ There didn’t seem to be any convincing linear relationships, however, between 
 So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Umap and the PCA model. The Umap model always gave me unviable results to try [, negative values for model channels, for example,], but I tried some of the suggestions that the PCA model gave me. 
 
 Although my sample size was only two, it seemed that the PCA model worked pretty well for finding a combination of parameters that generated a “good” pattern with a mean rating of 4.4:
-From mean rating 4.4:
+*From mean rating 4.4:*
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182500958-d2b34b30-8639-41a7-8989-320a7ad6880f.png)|![image](https://user-images.githubusercontent.com/103375681/182500973-f7f19deb-1d35-4f59-a134-5dff295b2887.png)|
 
 But, not so much for generating a “bad” pattern with a mean resting of .5. However, these textures do certainly apear to not be as great as the ones from the mean rating of 4.4:
 
-From mean rating .5:
+*From mean rating .5:*
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
@@ -119,26 +118,34 @@ results for the same set.
 *the regression lines shown are exponential*
 
 For example, this set of hyperparameters (set 5) yielded great results across the different target textures:):
-number of channels = 15
-Number of hidden channels = 96
-Max ca steps = 40
-Batch size = 2
-Number of filters = 4
-Update rate = 0.559994317
-Learning rate = 1e-05
+
+| Parameter | number |
+|---|---|
+| channels | 15 |
+| hidden channels | 96 |
+| max ca steps | 40 |
+| batch size | 2 |
+| filters | 4 |
+| update rate | 0.559994317 |
+| learning rate | 1e-05 |
+
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501810-455eaa8e-6f55-4140-abe4-2a3d6e340e77.png)|![image](https://user-images.githubusercontent.com/103375681/182501821-5821dca8-031c-4ab0-9339-3b82d50617cb.png)|
 |![image](https://user-images.githubusercontent.com/103375681/182501845-3fe599cd-56d9-486b-bef9-72668f3aed8c.png)|![image](https://user-images.githubusercontent.com/103375681/182501852-877dc531-4e10-411f-a93f-09a4392eaf93.png)|
 
 And this set of hyperparameters (set 8) yielded horrible results across the different target textures:
-number of channels = 6
-Number of hidden channels = 32
-Max ca steps = 40
-Batch size = 2
-Number of filters = 6
-Update rate = 0.980292
-Learning rate = 1e-05
+
+| Parameter | number |
+|---|---|
+| channels | 6 |
+| hidden channels | 32 |
+| max ca steps | 40 |
+| batch size | 2 |
+| filters | 6 |
+| update rate | 0.980292 |
+| learning rate | 1e-05 |
+
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501909-6a10f866-e607-4af2-a2a3-5b8c156aa49e.png)|![image](https://user-images.githubusercontent.com/103375681/182501919-36e7dcde-60c5-433c-a843-cc63ea7a82e5.png)|
