@@ -5,6 +5,8 @@
 ## Introduction
 We see patterns in nature everywhere-  plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
 
+[![](file:///Users/tanisha/Downloads/8wMA.gif)]
+
 One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene, like a detailed engineering blueprint followed precisely to build a living machine. However, the information storage requirements for this approach would be massive; consider the difference in file size between an uncompressed tif file (where every pixel is described exactly) and a compressed jpg or even a png file. 
 
 In the case of the compressed file types, the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. Instead we have the encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens) in the genome as a more viable explanation of organismal patterning and development. 
