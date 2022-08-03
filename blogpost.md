@@ -1,6 +1,6 @@
 # SRNCA blogpost
 
-**Stars make text bold, maybe put description here**
+**An analysis on **
 
 ## Introduction
 We see patterns in nature everywhere-  plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
