@@ -107,6 +107,7 @@ From mean rating .5:
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
+
 With further investigation into these and other statistics models in the future, it might be possible to confidently identify what clusters of parameters behave similarly. 
 
 ## Performance relationships across different textures
