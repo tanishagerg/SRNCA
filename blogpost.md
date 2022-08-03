@@ -112,11 +112,11 @@ With further investigation into these and other statistics models in the future,
 ## Performance relationships across different textures
 Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. Combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too.
 
-Back to the 10 randomly generated sets of hyperparameters tested on each of the four textures, according to the graph below of the roundleaf result (final loss) versus the other textures’ final
-results for the same set.
-![image](https://user-images.githubusercontent.com/103375681/182501434-93db2b14-7d33-4839-9224-974fc564a2ec.png)
-*the regression lines shown are exponential*
+Back to the 10 randomly generated sets of hyperparameters tested on each of the four textures, according to the graph below of the roundleaf result (final loss) versus the other textures’ final results for the same set.
 
+![image](https://user-images.githubusercontent.com/103375681/182501434-93db2b14-7d33-4839-9224-974fc564a2ec.png)
+
+### Hyperparameter set 5
 For example, this set of hyperparameters (set 5) yielded great results across the different target textures:):
 
 | Parameter | number |
@@ -134,6 +134,7 @@ For example, this set of hyperparameters (set 5) yielded great results across th
 |![image](https://user-images.githubusercontent.com/103375681/182501810-455eaa8e-6f55-4140-abe4-2a3d6e340e77.png)|![image](https://user-images.githubusercontent.com/103375681/182501821-5821dca8-031c-4ab0-9339-3b82d50617cb.png)|
 |![image](https://user-images.githubusercontent.com/103375681/182501845-3fe599cd-56d9-486b-bef9-72668f3aed8c.png)|![image](https://user-images.githubusercontent.com/103375681/182501852-877dc531-4e10-411f-a93f-09a4392eaf93.png)|
 
+### Hyperparameter set 8
 And this set of hyperparameters (set 8) yielded horrible results across the different target textures:
 
 | Parameter | number |
