@@ -20,13 +20,13 @@ One first guess at how animal and plant patterns arise would be that they are ha
 
 So what if the genomes could a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
-Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. ##EXPLAIN MORE?  
+Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[EXPLAIN BETTER HOW IT RELATES TO CAs?]**
 
-More recently, a work by Niklasson et al. published in distill [(https://distill.pub/selforg/2021/textures/)], presents a Neural cellular automata (NCA), which can learn textures by updating its parameters as it changes to reach a target texture (backpropagating). What is exciting about this model is that not only might it be able to explain textures that we haven’t yet explained, but it could potentially learn patterns of other models, including those in reaction-diffusion models like Turing Patterns.  ##what is the difference between a reaction diffusion system and the Turing model? Is a reaction diffusion system a broader term?	[EXPLAIN MORE ABT THE DIFFERENNCE AND WHAT BACKPROPAGATING IS
+More recently, Neural Cellular Automatas (NCAs) have been created, including a work by **Niklasson et al. [is this the correct name?] published in distill [(https://distill.pub/selforg/2021/textures/)]. **NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation.**
 
-https://distill.pub/selforg/2021/textures/ [I worked with a similar implementation of a neural cellular automata texture model available at –link to your fork of the repo– (also make sure to link to your experiment notebook somewhere)] The NCA I looked at is the Symbolic Regression Neural Cellular Automata (SRNCA)  LINK. To judge its texture as it is developing, the model uses the Gram matrix, which in short, flattens an image into different layers containing certain features, and calculates information about their relationships to the target texture, using dot products, to give a quantitative comparison to a target texture, which is used to calculate the loss. ##did I explain the Gram matrix properly? Is the Gram matrix result used as the loss, or is it one of the parts used to calculate the loss? [The loss is the mean squared error between the Gram matrices for the target image and the model output]
+What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
 
-[In a convolutional neural network, the numerical values in the hidden layers are often referred to as 'features', especially in deeper layers, many operations removed from the input. These can in fact look somewhat abstract compared to the pixel-by-pixel details of the input. Style loss can be computed from these features by computing a Gram matrix. A Gram matrix is computed as the product of each vector with every other vector's transpose (i.e. the inner, or dot product) in a set of vectors. For our purposes of computing matrices corresponding to image style, the vectors consist of all the pixels for a given feature channel in a hidden layer of the convolutional network, and the set of vectors correspond to each feature channel and its vector of pixel values. Remember that the features, or activations, in a convolutional neural network layer typically have dimensions of batch size, channels, height, and width. Each element of the Gram matrix corresponds to the inner product of a feature channel vector with another feature channel vector, and this is computed for each channel with every other channel. The resulting Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
+I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available at [link to your fork of the repo]. To calculate the machine's style loss (The style loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture), the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix is stores the dot product product of each vector with every other vector's transpose fo (i.e. the inner, or dot product) in a set of vectors. Each resulting Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -40,22 +40,7 @@ $$
 
 where the angle brackets and the dot are different ways of specifying the inner product.
 
-To get a style loss that can be back propagated through a model, we compute the Gram matrices for several hidden feature layers in a convolutional neural network and take the mean squared error between the Gram matrices for the image target and the model output. The end result is a loss that corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.]
-
-The loss in a machine learning model is a number that judges its performance, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture. 
-
-
-### equations test
-
-Testing equation rendering in GitHub flavored Markdown:
-
-$$
-\frac{\partial u}{\partial t} = r_u \nabla^2 u - uv^2 + f(1-u)
-$$
-
-$$
-\frac{\partial v}{\partial t} = r_v \nabla^2 v + uv^2 - v(f+k)
-$$
+Finally, from the Gram Matrices, the loss is calculated, which is the mean squared error between the Gram matrices for the target image and the model's curent output. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
 
 ## Hyperparameter Exploration
 I was interested in modeling plant textures with this algorithm, so I tested it on these four images of plants around my house, and gave them names that I’ll refer to throughout this post: 
