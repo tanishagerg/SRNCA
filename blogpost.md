@@ -11,16 +11,11 @@ We see patterns in nature everywhere-  plant textures such as variegation, disea
 |![image](https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png)|![image](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![image](https://user-images.githubusercontent.com/103375681/182693201-0387786a-0c1c-467b-af2b-7df1da2e842a.png)|
 |Pufferfish skin pattern|Gasteria leaf pattern|Cheetah fur pattern|
 
-
-
-
-
-
 One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
 
 So what if the genomes could a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
-Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[EXPLAIN BETTER HOW IT RELATES TO CAs?]**
+Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[I NEEDA EXPLAIN BETTER HOW IT RELATES TO CAs?]**
 
 More recently, Neural Cellular Automatas (NCAs) have been created, including a work by **Niklasson et al. [is this the correct name?] published in distill [(https://distill.pub/selforg/2021/textures/)]. **NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation.**
 
@@ -53,12 +48,16 @@ I was interested in modeling plant textures with this algorithm, so I tested it 
 I tested hyperparameters to learn more about their impact on the performance of the SRNCA. 
 
 This includes: 
-number of channels
-Number of hidden channels
-Batch size
-Number of filters
-Update rate 
-Learning rate
+
+| Parameter | description |
+|---|---|
+| number of channels | needawrite |
+| number of hidden channels | needawrite |
+| max ca steps | needawrite |
+| batch size | needawrite |
+| number of filters | needawrite |
+| update rate | needawrite |
+| learning rate | needawrite |
 
 I conducted most of my trials on the round leaf eggs texture leaf with eggs laid on it. What made this a great training image was that, out of these four textures, it had the highest variability in the final loss, the loss at step 16383. The loss usually ranged anywhere from .5 to 5. A higher variability of outcomes from the same parameters makes it easier to pinpoint specific trends because the data is more spread out. 
 
@@ -107,7 +106,7 @@ With further investigation into these and other statistics models in the future,
 ## Performance relationships across different textures
 Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. The way I tested this relationship was by generating 10 random sets of hyperparameters and testing them on all the four textures. I found that combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too. 
 ### Hyperparameter set 5
-For example, my fifth set yielded great results across the different target textures:):
+For example, my fifth set yielded great results across the different target textures:
 
 | Parameter | number |
 |---|---|
@@ -152,7 +151,11 @@ It showed  a positive, linear correlation, meaning that as the set yeilded a hig
 A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
 
 ## Conclusion
-It was awesome to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. This model allows us to find a ruleset for any texture imaginable, and it is exciting to think about how well it would work once we find the way to optimize it. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. 
+[It was awesome to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. This model allows us to find a ruleset for any texture imaginable, and it is exciting to think about how well it would work once we find the way to optimize it. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. ]
+
+It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. 
+
+If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook]. 
 
 ## Sources
 
