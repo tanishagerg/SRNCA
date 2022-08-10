@@ -161,7 +161,7 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 * Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters.
 * Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
-It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [link for my notebook]. 
+It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
 
 ## Sources
 
