@@ -1,7 +1,7 @@
 ## Modeling plant patterns with neural cellular automata 
 
 {:style="text-align:center;"}
-[![Texture learned from vesicle images from NASA Ames https://www.nasa.gov/centers/ames/news/releases/2001/01images/cellmembrane/cellmembrane.html](https://raw.githubusercontent.com/riveSunder/SRNCA/gh-pages/assets/texture_ca.gif){: width="512" }](https://raw.githubusercontent.com/riveSunder/SRNCA/master/data/images/texture_nca.gi://raw.githubusercontent.com/riveSunder/SRNCA/gh-pages/assets/texture_ca.gif)
+[![Leaf spot texture learned by NCA model](https://user-images.githubusercontent.com/103375681/182499254-a546525d-0dfc-491e-841d-00cb0b67f9fb.png){: width="512" }](https://user-images.githubusercontent.com/103375681/182499254-a546525d-0dfc-491e-841d-00cb0b67f9fb.png)
 
 Learned texture progression
 {:style="text-align:center;"}
