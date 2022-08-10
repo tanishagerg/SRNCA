@@ -17,11 +17,11 @@ So what if the genomes could a "compressed genome" instead? Similar to a compres
 
 Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[I NEEDA EXPLAIN BETTER HOW IT RELATES TO CAs?]**
 
-More recently, Neural Cellular Automatas (NCAs) have been created, including a work by **Niklasson et al. [is this the correct name?] published in distill [(https://distill.pub/selforg/2021/textures/)]. **NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation.**
+More recently, Neural Cellular Automatas (NCAs) have been created, including a work by **Niklasson et al. [is this the correct name?]** published in distill [(https://distill.pub/selforg/2021/textures/)]. NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation.
 
 What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
 
-I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available at [link to your fork of the repo]. To calculate the machine's style loss (The style loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture), the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix is stores the dot product product of each vector with every other vector's transpose fo (i.e. the inner, or dot product) in a set of vectors. Each resulting Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
+I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available at [link to your fork of the repo]. To calculate the machine's style loss (The style loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture), the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -86,7 +86,7 @@ Looking at 50 random textures that were trained to reach the roundleaf eggs text
 There didn’t seem to be any convincing linear relationships, however, between the hyperparameters and the final loss, as shown by these graphs of parameter values versus the loss:
 ![image](https://user-images.githubusercontent.com/103375681/182500467-d5598eb8-336f-40e0-96f1-b47474c3f031.png)
 
-So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Umap and the PCA model. The Umap model always gave me unviable results to try [, negative values for model channels, for example,], but I tried some of the suggestions that the PCA model gave me. 
+So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Principal Component Analysis (PCA) model and the Uniform Manifold Approximation and Projection (UMAP) model. The Umap model always gave me unviable results to try, such as negative values for model channels, but I tried some of the suggestions that the PCA model gave me. 
 
 Although my sample size was only two, it seemed that the PCA model worked pretty well for finding a combination of parameters that generated a “good” pattern with a mean rating of 4.4:
 *From mean rating 4.4:*
@@ -101,7 +101,7 @@ But, not so much for generating a “bad” pattern with a mean resting of .5. H
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
 
-With further investigation into these and other statistics models in the future, it might be possible to confidently identify what clusters of parameters behave similarly. 
+Noting that the PCA model is a linear model for dimensionality reduction and it yeilded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likley that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the "nonlinear PCA" [for example here](http://nlpca.org/) to uncover the ways the hyperparameters interact with eachother to yeild predicitible results. 
 
 ## Performance relationships across different textures
 Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. The way I tested this relationship was by generating 10 random sets of hyperparameters and testing them on all the four textures. I found that combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too. 
@@ -151,11 +151,17 @@ It showed  a positive, linear correlation, meaning that as the set yeilded a hig
 A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
 
 ## Conclusion
-[It was awesome to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. This model allows us to find a ruleset for any texture imaginable, and it is exciting to think about how well it would work once we find the way to optimize it. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. ]
+**Project accomplishments** [I really like how you worded these points, and I would definetly have understood this 9 months ago. Should I still paraphrase this or could I keep this?]
+* Trained NCA models to generate reasonable facsimiles of biologically generated patterns, nicely tying modern (neural) CA models and neural backprogation methods with one of the founding works of mathematical biology, Turing's seminal treatise on morphogenesis.
+* Used random search to find reliable hyperparemeters that work on multiple target image textures
+* Explored using dimensionality reduction methods UMAP and PCA to generate good (and poor-performing) hyperparameters, but found these methods didn't fully capture the effect of hyperparameters (or predicted non-viable hyperparameters).
+* Combined with poor linear fits of individual hyperparameters to style loss, the observation that small perturbations in principal components about a high-performing P.C cluster suggests that the interaction between hyperparameters is likely synergistic and non-linear, and could be better captured with a non-linear model.
 
-It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. Apart from optimization, It has the potential to learn rulesets in past models, like Turing patterns, and can also help us explain how patterns all around us that have not yet been explained, arise. 
+**Ideas for future work**
+* Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters.
+* Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
-If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook]. 
+It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [link for my notebook]. 
 
 ## Sources
 
