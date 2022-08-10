@@ -17,11 +17,11 @@ So what if the genomes could a "compressed genome" instead? Similar to a compres
 
 Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[I NEEDA EXPLAIN BETTER HOW IT RELATES TO CAs?]**
 
-More recently, Neural Cellular Automatas (NCAs) have been created, [including a work by Niklasson et al. published in distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation.
+More recently, Neural Cellular Automatas (NCAs) have been created, [including a work by Niklasson et al. published in distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the parameters of its layers via backpropagation. [I NEEDA STILL EXPLAIN BACKPROPAGATION]
 
 What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
 
-I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available at [link to your fork of the repo]. To calculate the machine's style loss (The style loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture), the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
+I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). To calculate the machine's style loss (The style loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the SRNCA, the loss judges how well the machine’s texture matches the target texture), the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -164,6 +164,10 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
 
 ## Sources
+
+* To add citations, you can use [^my_citation] in the text, and to the bottom of the post add
+
+[^my_citation]: Author, An. "Title of a work." publisher and stuff. [doi:12346557_online](httpps://online.internet)
 
 
 
