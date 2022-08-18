@@ -31,7 +31,7 @@ I worked with a similar implementation Niklasson et al's, called the the Symboli
 
 2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, flattens its input into different layers that contain vectors of numerical values often referred to as features. 
 
-3. Next, a Gram matrix is calculated for several layers of the conv-net. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
+3. Next, a Gram matrix is calculated for several layers of the conv-net. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -43,7 +43,7 @@ $$
 g_{i,j} = \langle v_i, v_j \rangle = v_i \cdot v_j
 $$
 
-where the angle brackets and the dot are different ways of specifying the inner product.
+where the angle brackets and the dot are different ways of specifying the inner product. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer.
 
 4. At the same time as steps 2 and 3 for the training image, the target texture image (the image that the model is trying to make a similar pattern to) is also used directly as input to the conv-net model, and Gram matrices are calculated for the target image. 
 
