@@ -15,14 +15,23 @@ One first guess at how animal and plant patterns arise would be that they are ha
 
 So what if the genomes could a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
-Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern. Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, which is called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges. **If mathmatical rulesets like these are given to all cells to automate the pattern formation in a model, it is called a Cellular Automata. ##[I NEEDA EXPLAIN BETTER HOW IT RELATES TO CAs?]**
+Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern.[^Turing1952] Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges, which explains morphogenisis (the biological process that generates cell patterns and structures) A key feature of his explanation is that it uses simple, local rules (meaning that the ruleeee) to describe a way for these complex morphologies to arise. In fact, locality is a component of many physical systems we might be interested in modeling, a reflection of the physics of our universe. 
 
-More recently, Neural Cellular Automatas (NCAs) have been created, [including a work by Niklasson et al. published in distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the weights of its layers via the process of backpropagation to minimize the machine's loss. 
+Locality is also an important feature of cellular automata, where rulets are given to all cells to automate the pattern formation in a model. This locality makes them effective for modeling a variety of physical processes such as pattern generation. The Gray-Scott model is a cellular automata that performs the reaction-diffusion computations and creates all the different Turing Patterns. 
+
+More recently, Neural Cellular Automatas (NCAs) have been created, including work by Niklasson et al. using NCA for textures[^Niklasson2018], published in [distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the weights of its layers via the process of backpropagation to minimize the machine's loss. 
 > the loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the a texture NCA, the loss judges how well the machine’s output matches the target texture. If you want to learn about how backpropagation works, [this site](https://towardsdatascience.com/understanding-backpropagation-abcc509ca9d0#:~:text=Backpropagation%20identifies%20which%20pathways%20are,the%20package%20of%20your%20choosing.) explains it quite well. 
 
 What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
 
-I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). To calculate the machine's style loss, the model, in short, flattens its texture into different layers that contain vectors of numerical values often refered to as features, that compare the target image texture's features to the model's texture's current features. Next, a Gram matrix is calculated for each layer. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
+I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). Here is how the NCA gets a style loss for its texture:
+
+1. First, the  NCA model generates a texture by iteratively applying its neural layer operations to an image grid
+[is the number of times it does this this max_ca_steps?]
+
+2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, flattens its input into different layers that contain vectors of numerical values often referred to as features. 
+
+3. Next, a Gram matrix is calculated for several layers of the conv-net. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -36,7 +45,9 @@ $$
 
 where the angle brackets and the dot are different ways of specifying the inner product.
 
-Finally, from the Gram Matrices, the loss is calculated, which is the mean squared error between the Gram matrices for the target image and the model's curent output. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
+4. The target texture image (the image that the model is trying to make a similar pattern to) is also used as input to the conv-net model, and step 3 is repeated again to calculate Gram matrices for the target image. 
+
+5. Finally, from the Gram Matrices from both the training image and the target texture image, the loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
 
 ## Hyperparameter Exploration
 I was interested in modeling plant textures with this algorithm, so I tested it on these four images of plants around my house, and gave them names that I’ll refer to throughout this post: 
@@ -62,7 +73,7 @@ This includes:
 
 I conducted most of my trials on the round leaf eggs texture leaf with eggs laid on it. What made this a great training image was that, out of these four textures, it had the highest variability in the final loss, the loss at step 16383. The loss usually ranged anywhere from .5 to 5. A higher variability of outcomes from the same parameters makes it easier to pinpoint specific trends because the data is more spread out. 
 
-##### Distribution of final losses across different textures in 10 different random sets of hyperparameters:
+#### Distribution of final losses across different textures in 10 different random sets of hyperparameters:
 ![image](https://user-images.githubusercontent.com/103375681/182497556-3518b809-0342-4b0c-83e3-11ccf985c799.png)
 *Each set of hyperparameters was tested on each of the four textures and corresponds to a color. As shown, the roundleaf target image had the most variability.*
 
@@ -169,6 +180,15 @@ It was nice to see first-hand how well the SRNCA can learn textures, even from p
 * To add citations, you can use [^my_citation] in the text, and to the bottom of the post add
 
 [^my_citation]: Author, An. "Title of a work." publisher and stuff. [doi:12346557_online](httpps://online.internet)
+
+[^Niklasson2021]: https://distill.pub/selforg/2021/textures/
+[^Turing1952]: https://www.semanticscholar.org/paper/The-chemical-basis-of-morphogenesis-Turing/d635e2843c6fb034e9126aa73ef9c2e4e2c4714d
+[^McInnes2018]: https://www.semanticscholar.org/paper/UMAP%3A-Uniform-Manifold-Approximation-and-Projection-McInnes-Healy/3a288c63576fc385910cb5bc44eaea75b442e62e
+
+<!-- PCA citations -->
+[^Hotelling1933]:  Hotelling, H. (1933). Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology, 24, 417–441, and 498–520.
+[^Pearson1901]: Karl Pearson F.R.S. (1901) LIII. On lines and planes of closest fit to systems of points in space, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 2:11, 559-572, DOI: 10.1080/14786440109462720
+[^Bergstra]: https://www.semanticscholar.org/paper/Random-Search-for-Hyper-Parameter-Optimization-Bergstra-Bengio/188e247506ad992b8bc62d6c74789e89891a984f
 
 
 
