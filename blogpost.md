@@ -19,7 +19,7 @@ Mathematician Alan Turing came up with a way to model this, which creates what i
 
 Locality is also an important feature of cellular automata, where rulets are given to all cells to automate the pattern formation in a model. This locality makes them effective for modeling a variety of physical processes such as pattern generation. The Gray-Scott model is a cellular automata that performs the reaction-diffusion computations and creates all the different Turing Patterns. 
 
-More recently, Neural Cellular Automatas (NCAs) have been created, including work by Niklasson et al. using NCA for textures[^Niklasson2018], published in [distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the weights of its layers via the process of backpropagation to minimize the machine's loss. 
+More recently, Neural Cellular Automatas (NCAs) have been created, including work by Niklasson et al. using NCA for textures[^Niklasson2021], published in [distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the weights of its layers via the process of backpropagation to minimize the machine's loss. 
 > the loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the a texture NCA, the loss judges how well the machine’s output matches the target texture. If you want to learn about how backpropagation works, [this site](https://towardsdatascience.com/understanding-backpropagation-abcc509ca9d0#:~:text=Backpropagation%20identifies%20which%20pathways%20are,the%20package%20of%20your%20choosing.) explains it quite well. 
 
 What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
@@ -101,6 +101,7 @@ There didn’t seem to be any convincing linear relationships, however, between 
 So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Principal Component Analysis (PCA) model and the Uniform Manifold Approximation and Projection (UMAP) model. The Umap model always gave me unviable results to try, such as negative values for model channels, but I tried some of the suggestions that the PCA model gave me. 
 
 Although my sample size was only two, it seemed that the PCA model worked pretty well for finding a combination of parameters that generated a “good” pattern with a mean rating of 4.4:
+
 *From mean rating 4.4:*
 | | |
 | ------------- | ------------- |
@@ -163,9 +164,11 @@ It showed  a positive, linear correlation, meaning that as the set yeilded a hig
 A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
 
 ## Conclusion
-**Project accomplishments** [I really like how you worded these points, and I would definetly have understood this 9 months ago. Should I still paraphrase this or could I keep this?]
-* Trained NCA models to generate reasonable facsimiles of biologically generated patterns, nicely tying modern (neural) CA models and neural backprogation methods with one of the founding works of mathematical biology, Turing's seminal treatise on morphogenesis.
-* Used random search to find reliable hyperparemeters that work on multiple target image textures
+
+**Project accomplishments** [I really like how you worded these points, and I would definitely have understood this 9 months ago. Should I still paraphrase this or could I keep this?]
+
+* Trained NCA models to generate reasonable facsimiles of biologically generated patterns. The application of NCA texture models to plant morphogenesis ties the modern tools of automatic differentiation and neural networks back to Turing's seminal work[^Turing1952], one of the founding works of mathematical biology.
+* Used random search to find reliable hyperparemeters that work on multiple target image textures.
 * Explored using dimensionality reduction methods UMAP and PCA to generate good (and poor-performing) hyperparameters, but found these methods didn't fully capture the effect of hyperparameters (or predicted non-viable hyperparameters).
 * Combined with poor linear fits of individual hyperparameters to style loss, the observation that small perturbations in principal components about a high-performing P.C cluster suggests that the interaction between hyperparameters is likely synergistic and non-linear, and could be better captured with a non-linear model.
 
@@ -173,7 +176,8 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 * Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters.
 * Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
-It was nice to see first-hand how well the SRNCA can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
+It was nice to see first-hand how well the SRNCA model can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
+
 
 ## Sources
 
