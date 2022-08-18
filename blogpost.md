@@ -7,7 +7,7 @@ We see patterns in nature everywhere-  our finger prints, plant textures such as
 | | | |
 | ------------- | ------------- | ------------- |
 |![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true)|![image](https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png)|![image](https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png)|
-|Belousov-Zhabotinsky reaction|Giraffe fur pattern|Haworthia leaf pattern|
+|Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern|Haworthia leaf pattern|
 |![image](https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png)|![image](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![image](https://user-images.githubusercontent.com/103375681/182693201-0387786a-0c1c-467b-af2b-7df1da2e842a.png)|
 |Pufferfish skin pattern|Gasteria leaf pattern|Cheetah fur pattern|
 
@@ -45,21 +45,21 @@ $$
 
 where the angle brackets and the dot are different ways of specifying the inner product.
 
-4. The target texture image (the image that the model is trying to make a similar pattern to) is also used as input to the conv-net model, and step 3 is repeated again to calculate Gram matrices for the target image. 
+4. At the same time as steps 2 and 3 for the training image, the target texture image (the image that the model is trying to make a similar pattern to) is also used directly as input to the conv-net model, and Gram matrices are calculated for the target image. 
 
-5. Finally, from the Gram Matrices from both the training image and the target texture image, the loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
+5. Finally, from the Gram Matrices from both the training image and the target texture image, the style loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
+
+You can visualize this process in this diagram: 
+![image](https://user-images.githubusercontent.com/103375681/185493138-78487dd7-30a1-4a20-bd2b-2fddb1fde322.png)
 
 ## Hyperparameter Exploration
-I was interested in modeling plant textures with this algorithm, so I tested it on these four images of plants around my house, and gave them names that I’ll refer to throughout this post: 
+I tested hyperparameters to learn more about their impact on the performance of the SRNCA, hoping to find insight into questions such as:
+- does any single hyperparameter affect the model output?
+- is there an optimal set of hyperparameters?
+- how are the hyperparamters related to each other and the model output?
+- does the same set of hyperparameters behave similarly across different training images?
 
-|roundleaf - Circular variegation from eggs laid on a maple leaf|orchid petal- Branching pigments on an orchid petal|alocasia- Veins on the underside of an Alocasia leaf|snake plant- Striped variegation on a snake plant|
-| ------------- | ------------- | ------------- | ------------- |
-|![image](https://user-images.githubusercontent.com/103375681/182497701-d9fb831d-5105-44ff-95e5-fe0cc097ad5a.png)|![image](https://user-images.githubusercontent.com/103375681/182497726-258800cf-225b-4276-9e7c-b41c144c9fbc.png)|![image](https://user-images.githubusercontent.com/103375681/182497758-cd5479a6-8f84-4044-9651-0301c43e7a97.png)|![image](https://user-images.githubusercontent.com/103375681/182497777-704412ef-3f93-44b9-9ffe-4c932a73324a.png)|
-
-
-I tested hyperparameters to learn more about their impact on the performance of the SRNCA. 
-
-This includes: 
+The hyperparameters include: 
 
 | Parameter | description |
 |---|---|
@@ -71,6 +71,17 @@ This includes:
 | update rate | needawrite |
 | learning rate | needawrite |
 
+Perhaps the most obvious method for hyperparameter search (beyond manual adjustment by a human operator) is grid search: systematically looping through each set of possibile values for each hyperparameter. Grid search is known to be inefficient at best, and random search represents an effective intermediate step between grid search and an additional optimization method over hyperparameters (_e.g._ an evolutionary algorithm). Random search over hyperparameters in general can be expected to give equal or better performance with a lower computational expense than grid search[^Bergstra2012].
+
+So, the first thing I did was use random values for the hyperparameters with different target textures and see the result. I recorded the values for the parameters used, and the final loss that the algorithm gave, after 16383 steps. 
+
+I was interested in creating plant textures with this algorithm, so the target textures I used were these four images of plants around my house, and gave them names that I’ll refer to throughout this post: 
+
+|roundleaf - Circular variegation from eggs laid on a maple leaf|orchid petal- Branching pigments on an orchid petal|alocasia- Veins on the underside of an Alocasia leaf|snake plant- Striped variegation on a snake plant|
+| ------------- | ------------- | ------------- | ------------- |
+|![image](https://user-images.githubusercontent.com/103375681/182497701-d9fb831d-5105-44ff-95e5-fe0cc097ad5a.png)|![image](https://user-images.githubusercontent.com/103375681/182497726-258800cf-225b-4276-9e7c-b41c144c9fbc.png)|![image](https://user-images.githubusercontent.com/103375681/182497758-cd5479a6-8f84-4044-9651-0301c43e7a97.png)|![image](https://user-images.githubusercontent.com/103375681/182497777-704412ef-3f93-44b9-9ffe-4c932a73324a.png)|
+
+
 I conducted most of my trials on the round leaf eggs texture leaf with eggs laid on it. What made this a great training image was that, out of these four textures, it had the highest variability in the final loss, the loss at step 16383. The loss usually ranged anywhere from .5 to 5. A higher variability of outcomes from the same parameters makes it easier to pinpoint specific trends because the data is more spread out. 
 
 #### Distribution of final losses across different textures in 10 different random sets of hyperparameters:
@@ -78,8 +89,7 @@ I conducted most of my trials on the round leaf eggs texture leaf with eggs laid
 *Each set of hyperparameters was tested on each of the four textures and corresponds to a color. As shown, the roundleaf target image had the most variability.*
 
 ## Effectiveness of the Gram Function
-The first thing I did was use random values for the hyperparameters and see the result. 
-I recorded the numbers for the parameters used, and the final loss that the algorithm gave, after 16383 steps. I also gave my own rating for the texture, on a scale of 0-5, with 5 being great: the color and unique patterns were extremely close to the target texture, and 0 being poor: the color or pattern was completely different from the target texture. 
+Firstly, apart from the hyperparameters themselves, I wanted to see how well the style loss (which if you remember from earlier, is calculated using Gram Matrices) judged the training image as it was developing. To do this, I simply plotted the final loss against my own rating of texture at its last step. I rated the textures on a scale of 0-5, with 5 being great: the color and unique patterns were extremely close to the target texture, and 0 being poor: the color or pattern was completely different from the target texture.  
 
 
 Here are some examples of generated textures and how I decided to score them:
@@ -94,11 +104,11 @@ Target image: roundleaf eggs
 Looking at 50 random textures that were trained to reach the roundleaf eggs texture, there was a pretty strong negative linear relationship between the final loss and my rating, which makes sense as a lower loss should mean a better pattern. It shows that the Gram matrix is quite effective at capturing the elements of style important to at least one human viewer.
 ![image](https://user-images.githubusercontent.com/103375681/182499610-6cabeeb2-1183-4573-9660-803626cacddf.png)
 
-## Relationships between parameter values and texture and outcomes
+## Relationships between parameter values and final output
 There didn’t seem to be any convincing linear relationships, however, between the hyperparameters and the final loss, as shown by these graphs of parameter values versus the loss:
 ![image](https://user-images.githubusercontent.com/103375681/182500467-d5598eb8-336f-40e0-96f1-b47474c3f031.png)
 
-So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Principal Component Analysis (PCA) model and the Uniform Manifold Approximation and Projection (UMAP) model. The Umap model always gave me unviable results to try, such as negative values for model channels, but I tried some of the suggestions that the PCA model gave me. 
+So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Principal Component Analysis[^Pearson1901][^Hotelling1933] (PCA) model and the Uniform Manifold Approximation and Projection[^McInnes2018] (UMAP) model. The Umap model always gave me unviable results to try, such as negative values for model channels, but I tried some of the suggestions that the PCA model gave me. 
 
 Although my sample size was only two, it seemed that the PCA model worked pretty well for finding a combination of parameters that generated a “good” pattern with a mean rating of 4.4:
 
@@ -114,7 +124,7 @@ But, not so much for generating a “bad” pattern with a mean resting of .5. H
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
 
-Noting that the PCA model is a linear model for dimensionality reduction and it yeilded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likley that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the "nonlinear PCA" [for example here](http://nlpca.org/) to uncover the ways the hyperparameters interact with eachother to yeild predicitible results. 
+Noting that the PCA model is a linear model for dimensionality reduction and it yeilded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likley that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the [Nonlinear PCA](http://nlpca.org/) to uncover the ways the hyperparameters interact with eachother to yeild predicitible results. 
 
 ## Performance relationships across different textures
 Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. The way I tested this relationship was by generating 10 random sets of hyperparameters and testing them on all the four textures. I found that combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too. 
@@ -185,19 +195,18 @@ It was nice to see first-hand how well the SRNCA model can learn textures, even 
 
 [^my_citation]: Author, An. "Title of a work." publisher and stuff. [doi:12346557_online](httpps://online.internet)
 
+<!-- papers and models -->
 [^Niklasson2021]: https://distill.pub/selforg/2021/textures/
 [^Turing1952]: https://www.semanticscholar.org/paper/The-chemical-basis-of-morphogenesis-Turing/d635e2843c6fb034e9126aa73ef9c2e4e2c4714d
-[^McInnes2018]: https://www.semanticscholar.org/paper/UMAP%3A-Uniform-Manifold-Approximation-and-Projection-McInnes-Healy/3a288c63576fc385910cb5bc44eaea75b442e62e
 
+<!-- UMAPP citations -->
+[^McInnes2018]: https://www.semanticscholar.org/paper/UMAP%3A-Uniform-Manifold-Approximation-and-Projection-McInnes-Healy/3a288c63576fc385910cb5bc44eaea75b442e62e
 <!-- PCA citations -->
 [^Hotelling1933]:  Hotelling, H. (1933). Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology, 24, 417–441, and 498–520.
 [^Pearson1901]: Karl Pearson F.R.S. (1901) LIII. On lines and planes of closest fit to systems of points in space, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 2:11, 559-572, DOI: 10.1080/14786440109462720
-[^Bergstra]: https://www.semanticscholar.org/paper/Random-Search-for-Hyper-Parameter-Optimization-Bergstra-Bengio/188e247506ad992b8bc62d6c74789e89891a984f
-
-
-
-
-
-
+<!-- random search citations -->
+[^Bergstra2012]: https://www.semanticscholar.org/paper/Random-Search-for-Hyper-Parameter-Optimization-Bergstra-Bengio/188e247506ad992b8bc62d6c74789e89891a984f
+<!-- pics/gifs -->
+[^Kench2011]: https://www.youtube.com/watch?v=PpyKSRo8Iec
 
 
