@@ -20,9 +20,9 @@ trial 5:
 
 | | |
 |---|---|
-| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true" width="200" height="200" />| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true" width="200" height="200" /> |
+| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true" width="300" height="300" />| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true" width="300" height="300" /> |
 | round | orchid |
-| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif" width="200" height="200" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif" width="200" height="200" /> |
+| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif" width="300" height="300" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif" width="300" height="300" /> |
 | alocasia | snakepant |
 
 
@@ -39,7 +39,7 @@ trial 8:
 
 | | |
 |---|---|
-| round | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif" width="200" height="200" /> |
+|  <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif" width="300" height="300" />  | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif" width="300" height="300" /> |
 | round | orchid |
-| <img src="https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif" width="200" height="200" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif" width="200" height="200" /> |
+| <img src="https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif" width="300" height="300" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif" width="300" height="300" /> |
 | alocasia | snakepant |
