@@ -1,10 +1,5 @@
 
 
-[link to google form](https://docs.google.com/forms/d/e/1FAIpQLSfuRvZ1u1TWFIjGzpXmnQD5AkPwZkCoTpIqTGCUXCPge__nnw/viewform?usp=sf_link)
-
-[link to google sheets](https://docs.google.com/spreadsheets/d/1GI9iMJG7LvSZESkDxAlGXjFiYvlaPTN4VuzO9dq-rtM/edit)
-
-![image](https://user-images.githubusercontent.com/103375681/185493138-78487dd7-30a1-4a20-bd2b-2fddb1fde322.png)
 # .
 # . 
 # . 
