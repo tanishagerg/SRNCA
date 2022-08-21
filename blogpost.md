@@ -29,7 +29,7 @@ I worked with a similar implementation Niklasson et al's, called the the Symboli
 1. First, the  NCA model generates a texture by iteratively applying its neural layer operations to an image grid
 [is the number of times it does this this max_ca_steps?]
 
-2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, flattens its input into different layers that contain vectors of numerical values often referred to as features. 
+2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, flattens its input into different layers, often known as features, that contain vectors of numerical values.
 
 3. Next, a Gram matrix is calculated for several layers of the conv-net. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
