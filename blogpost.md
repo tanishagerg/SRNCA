@@ -32,15 +32,14 @@ I worked with a similar implementation Niklasson et al's, called the the Symboli
 
 3. Next, a Gram matrix is calculated for several layers of the conv-net, which allows us to see how these vectors are correlated. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
-$$
-g_{i,j} = v_i v_j^T
-$$
+{:style="text-align:center;"}
+![matmul_transpose](https://user-images.githubusercontent.com/103375681/186998862-61a20579-9e1e-46dd-b53d-d70f9c179a97.png)
 
 or as
 
-$$
-g_{i,j} = \langle v_i, v_j \rangle = v_i \cdot v_j
-$$
+{:style="text-align:center;"}
+![dot_product](https://user-images.githubusercontent.com/103375681/186998875-542d5d17-0329-426a-a39c-f0f7b12e0c83.png)
+
 
 where the angle brackets and the dot are different ways of specifying the inner product. As a result, each Gram matrix has as many rows and columns as the number of channels in the layer.
 
