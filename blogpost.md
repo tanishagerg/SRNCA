@@ -189,15 +189,15 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 <br>
 ## Conclusion
 
-**Project accomplishments** [I really like how you worded these points, and I would definitely have understood this 9 months ago. Should I still paraphrase this or could I keep this?]
+**Project accomplishments**
 
 * Trained NCA models to generate reasonable facsimiles of biologically generated patterns. The application of NCA texture models to plant morphogenesis ties the modern tools of automatic differentiation and neural networks back to Turing's seminal work[^Turing1952], one of the founding works of mathematical biology.
 * Used random search to find reliable hyperparemeters that work on multiple target image textures.
-* Explored using dimensionality reduction methods UMAP and PCA to generate good (and poor-performing) hyperparameters, but found these methods didn't fully capture the effect of hyperparameters (or predicted non-viable hyperparameters).
+* Explored using dimensionality reduction methods UMAP and PCA to generate good (and poor-performing) hyperparameters, but found these methods didn't fully capture the effect of hyperparameters (or predicted non-viable hyperparameters). If you would like to see these results yourself, or play around with these models and the data, [you can use this notebook I used](https://www.kaggle.com/code/tanishagerg/hyperparam-exploration-with-dim-reduction-d12210)
 * Combined with poor linear fits of individual hyperparameters to style loss, the observation that small perturbations in principal components about a high-performing P.C cluster suggests that the interaction between hyperparameters is likely synergistic and non-linear, and could be better captured with a non-linear model.
 
 **Ideas for future work**
-* Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters.
+* Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters. 
 * Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
 It was nice to see first-hand how well the SRNCA model can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
