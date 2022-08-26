@@ -9,7 +9,7 @@ We see patterns in nature everywhere-  our finger prints, plant textures such as
 |![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true)|![image](https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png)|![image](https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png)|
 |Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern|Haworthia leaf pattern|
 |![image](https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png)|![image](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![image](https://user-images.githubusercontent.com/103375681/182693201-0387786a-0c1c-467b-af2b-7df1da2e842a.png)|
-|Pufferfish skin pattern|Gasteria leaf pattern|Cheetah fur pattern|
+|Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Cheetah fur pattern|
 
 One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
 
@@ -208,22 +208,21 @@ It was nice to see first-hand how well the SRNCA model can learn textures, even 
 <br>
 ## Sources
 
-* To add citations, you can use [^my_citation] in the text, and to the bottom of the post add
-
-[^my_citation]: Author, An. "Title of a work." publisher and stuff. [doi:12346557_online](httpps://online.internet)
+<!--* To add citations, you can use [^my_citation] in the text, and to the bottom of the post add [^my_citation]: Author, An. "Title of a work." publisher and stuff. [doi:12346557_online](httpps://online.internet)-->
 
 <!-- papers and models -->
-[^Niklasson2021]: https://distill.pub/selforg/2021/textures/
-[^Turing1952]: https://www.semanticscholar.org/paper/The-chemical-basis-of-morphogenesis-Turing/d635e2843c6fb034e9126aa73ef9c2e4e2c4714d
+[^Niklasson2021]: Niklasson, E., Mordvintsev, A., Randazzo, E., & Levin, M. (2021, May 7). Self-organising textures. Distill. Retrieved August 26, 2022, from https://distill.pub/selforg/2021/textures/ 
+[^Turing1952]: Turing, A. (1970, January 1). [PDF] the chemical basis of morphogenesis: Semantic scholar. undefined. Retrieved August 26, 2022, from https://www.semanticscholar.org/paper/The-chemical-basis-of-morphogenesis-Turing/d635e2843c6fb034e9126aa73ef9c2e4e2c4714d 
 
 <!-- UMAPP citations -->
-[^McInnes2018]: https://www.semanticscholar.org/paper/UMAP%3A-Uniform-Manifold-Approximation-and-Projection-McInnes-Healy/3a288c63576fc385910cb5bc44eaea75b442e62e
+[^McInnes2018]: McInnes, L., & Healy, J. (1970, January 1). [PDF] UMAP: Uniform Manifold approximation and projection for dimension reduction: Semantic scholar. undefined. Retrieved August 26, 2022, from https://www.semanticscholar.org/paper/UMAP%3A-Uniform-Manifold-Approximation-and-Projection-McInnes-Healy/3a288c63576fc385910cb5bc44eaea75b442e62e 
 <!-- PCA citations -->
 [^Hotelling1933]:  Hotelling, H. (1933). Analysis of a complex of statistical variables into principal components. Journal of Educational Psychology, 24, 417–441, and 498–520.
 [^Pearson1901]: Karl Pearson F.R.S. (1901) LIII. On lines and planes of closest fit to systems of points in space, The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science, 2:11, 559-572, DOI: 10.1080/14786440109462720
 <!-- random search citations -->
-[^Bergstra2012]: https://www.semanticscholar.org/paper/Random-Search-for-Hyper-Parameter-Optimization-Bergstra-Bengio/188e247506ad992b8bc62d6c74789e89891a984f
+[^Bergstra2012]: Bergstra, J., &amp; Bengio, Y. (1970, January 1). [PDF] random search for hyper-parameter optimization: Semantic scholar. undefined. Retrieved August 26, 2022, from https://www.semanticscholar.org/paper/Random-Search-for-Hyper-Parameter-Optimization-Bergstra-Bengio/188e247506ad992b8bc62d6c74789e89891a984f 
 <!-- pics/gifs -->
-[^Kench2011]: https://www.youtube.com/watch?v=PpyKSRo8Iec
+[^Kench2011]: Tim Kench. (2011). The Belousov-Zhabotinsky Oscillating Reaction. Youtube. Retrieved August 26, 2022, from https://www.youtube.com/watch?v=PpyKSRo8Iec. 
 
+[^Dato-on]: Dato-on, A. (n.d.). Yellow and Black Pufferfish Swimming in the Aquarium. pexels.com. Retrieved August 26, 2022, from https://www.pexels.com/photo/yellow-and-black-pufferfish-swimming-in-the-aquarium-9408366/. 
 
