@@ -15,7 +15,7 @@ One first guess at how animal and plant patterns arise would be that they are ha
 
 So what if the genomes could a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
-Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern.[^Turing1952] Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges, which explains morphogenisis (the biological process that generates cell patterns and structures) A key feature of his explanation is that it uses simple, local rules (meaning that the ruleeee) to describe a way for these complex morphologies to arise. In fact, locality is a component of many physical systems we might be interested in modeling, a reflection of the physics of our universe. 
+Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern.[^Turing1952] Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges, which explains morphogenisis (the biological process that generates cell patterns and structures) A key feature of his explanation is that it uses simple, local rules to describe a way for these complex morphologies to arise. In fact, locality is a component of many physical systems we might be interested in modeling, a reflection of the physics of our universe. 
 
 Locality is also an important feature of cellular automata, where rulets are given to all cells to automate the pattern formation in a model. This locality makes them effective for modeling a variety of physical processes such as pattern generation. The Gray-Scott model is a cellular automata that performs the reaction-diffusion computations and creates all the different Turing Patterns. 
 
@@ -65,13 +65,13 @@ The hyperparameters include:
 
 | Parameter | description |
 |---|---|
-| number of channels | needawrite |
-| number of hidden channels | needawrite |
-| max ca steps | needawrite |
-| batch size | needawrite |
-| number of filters | needawrite |
-| update rate | needawrite |
-| learning rate | needawrite |
+| number of channels | grid channels (including RGB) |
+| number of hidden channels | NCA hidden channels |
+| max ca steps | maximum number of grid updates |
+| batch size | number of samples in a batch |
+| number of filters | number of (unlearned) perception kernels |
+| update rate | proportion of pixels updated each ca step |
+| learning rate | rate that modifies how quickly NCA parameters change |
 
 Perhaps the most obvious method for hyperparameter search (beyond manual adjustment by a human operator) is grid search: systematically looping through each set of possibile values for each hyperparameter. Grid search is known to be inefficient at best, and random search represents an effective intermediate step between grid search and an additional optimization method over hyperparameters (_e.g._ an evolutionary algorithm). Random search over hyperparameters in general can be expected to give equal or better performance with a lower computational expense than grid search[^Bergstra2012].
 
