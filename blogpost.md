@@ -51,7 +51,9 @@ where the angle brackets and the dot are different ways of specifying the inner 
 
 You can visualize this process in this diagram: 
 ![image](https://user-images.githubusercontent.com/103375681/185493138-78487dd7-30a1-4a20-bd2b-2fddb1fde322.png)
-
+<br>
+<br>
+<br>
 ## Hyperparameter Exploration
 I tested hyperparameters to learn more about their impact on the performance of the SRNCA, hoping to find insight into questions such as:
 - does any single hyperparameter affect the model output?
@@ -83,11 +85,16 @@ I was interested in creating plant textures with this algorithm, so the target t
 
 
 I conducted most of my trials on the round leaf eggs texture leaf with eggs laid on it. What made this a great training image was that, out of these four textures, it had the highest variability in the final loss, the loss at step 16383. The loss usually ranged anywhere from .5 to 5. A higher variability of outcomes from the same parameters makes it easier to pinpoint specific trends because the data is more spread out. 
-
-#### Distribution of final losses across different textures in 10 different random sets of hyperparameters:
+<br>
+<br>
+<br>
+<center> <h3> Distribution of final losses across different textures in 10 different random sets of hyperparameters: </h3> </center>
+  
 ![image](https://user-images.githubusercontent.com/103375681/182497556-3518b809-0342-4b0c-83e3-11ccf985c799.png)
 *Each set of hyperparameters was tested on each of the four textures and corresponds to a color. As shown, the roundleaf target image had the most variability.*
-
+<br>
+<br>
+<br>
 ## Effectiveness of the Gram Function
 Firstly, apart from the hyperparameters themselves, I wanted to see how well the style loss (which if you remember from earlier, is calculated using Gram Matrices) judged the training image as it was developing. To do this, I simply plotted the final loss against my own rating of texture at its last step. I rated the textures on a scale of 0-5, with 5 being great: the color and unique patterns were extremely close to the target texture, and 0 being poor: the color or pattern was completely different from the target texture.  
 
@@ -103,7 +110,9 @@ Target image: roundleaf eggs
 
 Looking at 50 random textures that were trained to reach the roundleaf eggs texture, there was a pretty strong negative linear relationship between the final loss and my rating, which makes sense as a lower loss should mean a better pattern. It shows that the Gram matrix is quite effective at capturing the elements of style important to at least one human viewer.
 ![image](https://user-images.githubusercontent.com/103375681/182499610-6cabeeb2-1183-4573-9660-803626cacddf.png)
-
+<br>
+<br>
+<br>
 ## Relationships between parameter values and final output
 There didn’t seem to be any convincing linear relationships, however, between the hyperparameters and the final loss, as shown by these graphs of parameter values versus the loss:
 ![image](https://user-images.githubusercontent.com/103375681/182500467-d5598eb8-336f-40e0-96f1-b47474c3f031.png)
@@ -125,7 +134,9 @@ But, not so much for generating a “bad” pattern with a mean resting of .5. H
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
 
 Noting that the PCA model is a linear model for dimensionality reduction and it yeilded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likley that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the [Nonlinear PCA](http://nlpca.org/) to uncover the ways the hyperparameters interact with eachother to yeild predicitible results. 
-
+<br>
+<br>
+<br>
 ## Performance relationships across different textures
 Performance across different textures seemed to be the most tight relationship that I saw in exploring the hyperparameters. The way I tested this relationship was by generating 10 random sets of hyperparameters and testing them on all the four textures. I found that combinations that didn’t work well on one pattern didn’t do very well on the other textures, and combinations that did work well seemed to work great on others too. 
 ### Hyperparameter set 5
@@ -141,7 +152,6 @@ For example, my fifth set yielded great results across the different target text
 | update rate | 0.559994317 |
 | learning rate | 1e-05 |
 
-GIF SET 5:
 | | |
 |---|---|
 | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true" width="300" height="300"/>| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true" width="300" height="300" /> |
@@ -162,8 +172,6 @@ And my eight set yielded horrible results across the different target textures:
 | update rate | 0.980292 |
 | learning rate | 1e-05 |
 
-
-GIF SET 8:
 | | |
 |---|---|
 |  <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif" width="300" height="300" />  | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif" width="300" height="300" /> |
@@ -178,7 +186,9 @@ GIF SET 8:
 It showed  a positive, linear correlation, meaning that as the set yeilded a higher loss (a worse pattern) for the roundleaf texture, it would also yeild a higher loss for the other textures, and vice versa. It was also interesting that each distribution had an increasing spread as the loss increased. This makes sense because as set yeilds a less and less acurate result (increasing loss) for the roundleaf texture, there are more possibilities of textures to be generated which increases the range of possibile outcomes for the other textures. Finally, even with only ten samples, each of the relationships seemed to have a y-intercept of approximately 0. This is notable because it suggests that a hyperparameter set that is extremley close to zero for one texture, would likley also minimize the loss for other textures too, and therefore that there is an optimal set of hyperparameters.   
 
 A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
-
+<br>
+<br>
+<br>
 ## Conclusion
 
 **Project accomplishments** [I really like how you worded these points, and I would definitely have understood this 9 months ago. Should I still paraphrase this or could I keep this?]
@@ -193,8 +203,9 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 * Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
 It was nice to see first-hand how well the SRNCA model can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
-
-
+<br>
+<br>
+<br>
 ## Sources
 
 * To add citations, you can use [^my_citation] in the text, and to the bottom of the post add
