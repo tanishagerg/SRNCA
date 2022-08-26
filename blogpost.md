@@ -27,11 +27,10 @@ What is exciting about NCAs model is that they may be able to learn plausible pr
 I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). Here is how the NCA gets a style loss for its texture:
 
 1. First, the  NCA model generates a texture by iteratively applying its neural layer operations to an image grid
-[is the number of times it does this this max_ca_steps?]
 
-2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, flattens its input into different layers, often known as features, that contain vectors of numerical values.
+2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, extracts features using multiple layers of convolutions, and stores these features as vectors. 
 
-3. Next, a Gram matrix is calculated for several layers of the conv-net. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
+3. Next, a Gram matrix is calculated for several layers of the conv-net, which allows us to see how these vectors are correlated. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
 $$
 g_{i,j} = v_i v_j^T
@@ -47,7 +46,7 @@ where the angle brackets and the dot are different ways of specifying the inner 
 
 4. At the same time as steps 2 and 3 for the training image, the target texture image (the image that the model is trying to make a similar pattern to) is also used directly as input to the conv-net model, and Gram matrices are calculated for the target image. 
 
-5. Finally, from the Gram Matrices from both the training image and the target texture image, the style loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss corresponds to the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
+5. Finally, from the Gram Matrices from both the training image and the target texture image, the style loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss gives us a rating of the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
 
 You can visualize this process in this diagram: 
 ![image](https://user-images.githubusercontent.com/103375681/185493138-78487dd7-30a1-4a20-bd2b-2fddb1fde322.png)
@@ -79,7 +78,7 @@ So, the first thing I did was use random values for the hyperparameters with dif
 
 I was interested in creating plant textures with this algorithm, so the target textures I used were these four images of plants around my house, and gave them names that I’ll refer to throughout this post: 
 
-|roundleaf - Circular variegation from eggs laid on a maple leaf|orchid petal- Branching pigments on an orchid petal|alocasia- Veins on the underside of an Alocasia leaf|snake plant- Striped variegation on a snake plant|
+|Roundleaf - Circular variegation from eggs laid on a maple leaf|Orchid Petal- Branching pigments on an orchid petal|Alocasia- Veins on the underside of an Alocasia leaf|Snake Plant- Striped variegation on a Snake Plant|
 | ------------- | ------------- | ------------- | ------------- |
 |<img src="https://user-images.githubusercontent.com/103375681/182497701-d9fb831d-5105-44ff-95e5-fe0cc097ad5a.png" />|<img src="https://user-images.githubusercontent.com/103375681/182497726-258800cf-225b-4276-9e7c-b41c144c9fbc.png" /> | <img src="https://user-images.githubusercontent.com/103375681/182497758-cd5479a6-8f84-4044-9651-0301c43e7a97.png" /> |<img src="https://user-images.githubusercontent.com/103375681/182497777-704412ef-3f93-44b9-9ffe-4c932a73324a.png"  />|
 
