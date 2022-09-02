@@ -6,10 +6,15 @@
 We see patterns in nature everywhere-  our finger prints, plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
 | | | |
 | ------------- | ------------- | ------------- |
-|![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true)|![image](https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png)|![image](https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png)|
-|Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern|Haworthia leaf pattern|
-|![image](https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png)|![image](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![image](https://user-images.githubusercontent.com/103375681/182693201-0387786a-0c1c-467b-af2b-7df1da2e842a.png)|
-|Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Cheetah fur pattern|
+|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="400" height="300"/>|
+|Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern[^Sutter2022]|Haworthia leaf pattern|
+|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="400" height="300"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="400" height="300"/>|
+|Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
+
+<!-- ![image](https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) -->
+
+
+
 
 One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
 
@@ -223,4 +228,8 @@ It was nice to see first-hand how well the SRNCA model can learn textures, even 
 [^Kench2011]: Tim Kench. (2011). The Belousov-Zhabotinsky Oscillating Reaction. Youtube. Retrieved August 26, 2022, from https://www.youtube.com/watch?v=PpyKSRo8Iec. 
 
 [^Dato-on]: Dato-on, A. (n.d.). Yellow and Black Pufferfish Swimming in the Aquarium. pexels.com. Retrieved August 26, 2022, from https://www.pexels.com/photo/yellow-and-black-pufferfish-swimming-in-the-aquarium-9408366/. 
+
+[^Sutter2022]: Sutter, B. (2022). Close-up of Giraffe Body Skin Fur. Pexels.com. Retrieved September 2, 2022, from https://www.pexels.com/photo/close-up-of-giraffe-body-skin-fur-12406721/. 
+
+[^Anonymous2017]: Anonymous. (2017). Zebra Fur. Pexels.com. Retrieved September 2, 2022, from https://www.pexels.com/photo/zebra-fur-70376/. 
 
