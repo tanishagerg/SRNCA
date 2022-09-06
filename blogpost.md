@@ -3,16 +3,16 @@
 **A discussion on how we model texture generations, hyperparameter exploration on the Symbolic Regression Neural Cellular Automata model, and what they can tell us about the patterns we see in the world around us.**
 
 ## Introduction
-We see patterns in nature everywhere-  our finger prints, plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
+We see patterns in nature everywhere-  our fingerprints, plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
 
 {:style="text-align:center;"}
 | | | |
 | ------------- | ------------- | ------------- |
-|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="225" height="200"/>|
+|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="275" height="230"/>|
 |Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern[^Sutter2022]|Haworthia leaf pattern|
-|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="225" height="200"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="225" height="200"/>|
+|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="275" height="230"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="275" height="230"/>|
 |Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
-|<img src = "https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png" width="225" height="200"/>
+|<img src = "https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png" width="275" height="230"/>
 |Trout sklin pattern|Lichen growth|Maple leaf veins|
 
 
@@ -22,26 +22,26 @@ We see patterns in nature everywhere-  our finger prints, plant textures such as
 
 
 
-One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
+One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar to why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
 
-So what if the genomes could a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images base on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
+So what if the genomes could have a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images based on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
-Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern.[^Turing1952] Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathmatical system, called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges, which explains morphogenisis (the biological process that generates cell patterns and structures) A key feature of his explanation is that it uses simple, local rules to describe a way for these complex morphologies to arise. In fact, locality is a component of many physical systems we might be interested in modeling, a reflection of the physics of our universe. 
+Mathematician Alan Turing came up with a way to model this, which creates what is now known as a Turing Pattern.[^Turing1952] Through his paper called “The Chemical Basis of Morphogenesis”, he presents a mathematical system, called a “reaction-diffusion model” where two substances spread (diffuse) throughout the system interact with each other (react) and eventually a stable pattern emerges, which explains morphogenesis (the biological process that generates cell patterns and structures) A key feature of his explanation is that it uses simple, local rules to describe a way for these complex morphologies to arise. In fact, locality is a component of many physical systems we might be interested in modeling, a reflection of the physics of our universe. 
 
-Locality is also an important feature of cellular automata, where rulets are given to all cells to automate the pattern formation in a model. This locality makes them effective for modeling a variety of physical processes such as pattern generation. The Gray-Scott model is a cellular automata that performs the reaction-diffusion computations and creates all the different Turing Patterns. 
+Locality is also an important feature of cellular automata, where rule sets are given to all cells to automate the pattern formation in a model. This locality makes them effective for modeling a variety of physical processes such as pattern generation. The Gray-Scott model is a cellular automata that performs the reaction-diffusion computations and creates all the different Turing Patterns. 
 
 More recently, Neural Cellular Automatas (NCAs) have been created, including work by Niklasson et al. using NCA for textures[^Niklasson2021], published in [distill](https://distill.pub/selforg/2021/textures/). NCA models preserve the local dynamics of rule-based CA (and many physical systems besides), but use neural networks in place of rules based on logical or mathematical functions as in a conventional CA. Texture NCA can learn textures by iteratively updating the weights of its layers via the process of backpropagation to minimize the machine's loss. 
-> the loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In the a texture NCA, the loss judges how well the machine’s output matches the target texture. If you want to learn about how backpropagation works, [this site](https://towardsdatascience.com/understanding-backpropagation-abcc509ca9d0#:~:text=Backpropagation%20identifies%20which%20pathways%20are,the%20package%20of%20your%20choosing.) explains it quite well. 
+> the loss in a machine learning model is a number that judges its performance as it is developing, with a lower score meaning a better performance. In a texture NCA, the loss judges how well the machine’s output matches the target texture. If you want to learn about how backpropagation works, [this site](https://towardsdatascience.com/understanding-backpropagation-abcc509ca9d0#:~:text=Backpropagation%20identifies%20which%20pathways%20are,the%20package%20of%20your%20choosing.) explains it quite well. 
 
 What is exciting about NCAs model is that they may be able to learn plausible processes that could explain how different textural patterns are generated, including processes that might be further distilled into mathematical models like reaction-diffusion systems.
 
-I worked with a similar implementation Niklasson et al's, called the the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). Here is how the NCA gets a style loss for its texture:
+I worked with a similar implementation to Niklasson et al's, called the Symbolic Regression Neural Cellular Automata (SRNCA) available [here](https://github.com/tanishagerg/SRNCA). Here is how the NCA gets a style loss for its texture:
 
 1. First, the  NCA model generates a texture by iteratively applying its neural layer operations to an image grid
 
 2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (conv-net) (we used VGG16), which, in short, extracts features (such as vertical edges, horizontal edges, and points) using multiple layers of convolutions, and stores these features as vectors. 
 
-3. Next, a Gram matrix is calculated for several layers of the conv-net, which allows us to see how these vectors are correlated. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
+3. Next, a Gram matrix is calculated for several layers of the conv-net, which allows us to see how these vectors are correlated. A Gram matrix stores the dot product (the product of a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
 {:style="text-align:center;"}
 ![matmul_transpose](https://user-images.githubusercontent.com/103375681/186998862-61a20579-9e1e-46dd-b53d-d70f9c179a97.png)
@@ -67,7 +67,7 @@ You can visualize this process in this diagram:
 I tested hyperparameters to learn more about their impact on the performance of the SRNCA, hoping to find insight into questions such as:
 - does any single hyperparameter affect the model output?
 - is there an optimal set of hyperparameters?
-- how are the hyperparamters related to each other and the model output?
+- how are the hyperparameters related to each other and the model output?
 - does the same set of hyperparameters behave similarly across different training images?
 
 The hyperparameters include: 
@@ -82,7 +82,7 @@ The hyperparameters include:
 | update rate | proportion of pixels updated each ca step |
 | learning rate | rate that modifies how quickly NCA parameters change |
 
-Perhaps the most obvious method for hyperparameter search (beyond manual adjustment by a human operator) is grid search: systematically looping through each set of possibile values for each hyperparameter. Grid search is known to be inefficient at best, and random search represents an effective intermediate step between grid search and an additional optimization method over hyperparameters (_e.g._ an evolutionary algorithm). Random search over hyperparameters in general can be expected to give equal or better performance with a lower computational expense than grid search[^Bergstra2012].
+Perhaps the most obvious method for hyperparameter search (beyond manual adjustment by a human operator) is grid search: systematically looping through each set of possible values for each hyperparameter. Grid search is known to be inefficient at best, and random search represents an effective intermediate step between grid search and an additional optimization method over hyperparameters (_e.g._ an evolutionary algorithm). Random search over hyperparameters in general can be expected to give equal or better performance with a lower computational expense than grid search[^Bergstra2012].
 
 So, the first thing I did was use random values for the hyperparameters with different target textures and see the result. I recorded the values for the parameters used, and the final loss that the algorithm gave, after 16383 steps. 
 
@@ -135,14 +135,14 @@ Although my sample size was only two, it seemed that the PCA model worked pretty
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182500958-d2b34b30-8639-41a7-8989-320a7ad6880f.png)|![image](https://user-images.githubusercontent.com/103375681/182500973-f7f19deb-1d35-4f59-a134-5dff295b2887.png)|
 
-But, not so much for generating a “bad” pattern with a mean resting of .5. However, these textures do certainly apear to not be as great as the ones from the mean rating of 4.4:
+But, not so much for generating a “bad” pattern with a mean resting of .5. However, these textures do certainly appear to not be as great as the ones from the mean rating of 4.4:
 
 *From mean rating .5:*
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
 
-Noting that the PCA model is a linear model for dimensionality reduction and it yeilded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likley that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the [Nonlinear PCA](http://nlpca.org/) to uncover the ways the hyperparameters interact with eachother to yeild predicitible results. 
+Noting that the PCA model is a linear model for dimensionality reduction and it yielded mediocre results, and that there were no notable correlations in linear fits to each individual hyperparameter as discussed earlier, it is likely that the parameters interact in a nonlinear way (for example, increasing the learning rate might only be better when you also increase the batch size). The UMAP model for gathering clusters of hyperparameters is non-linear, but it didn't pass the sanity check of predicting hyperparameters I could actually use. A next step would be to try another nonlinear model, such as the [Nonlinear PCA](http://nlpca.org/) to uncover the ways the hyperparameters interact with each other to yield predictable results. 
 <br>
 <br>
 <br>
@@ -192,7 +192,7 @@ And my eight set yielded horrible results across the different target textures:
 
 ![image](https://user-images.githubusercontent.com/103375681/182501434-93db2b14-7d33-4839-9224-974fc564a2ec.png)
 
-It showed  a positive, linear correlation, meaning that as the set yeilded a higher loss (a worse pattern) for the roundleaf texture, it would also yeild a higher loss for the other textures, and vice versa. It was also interesting that each distribution had an increasing spread as the loss increased. This makes sense because as set yeilds a less and less acurate result (increasing loss) for the roundleaf texture, there are more possibilities of textures to be generated which increases the range of possibile outcomes for the other textures. Finally, even with only ten samples, each of the relationships seemed to have a y-intercept of approximately 0. This is notable because it suggests that a hyperparameter set that is extremley close to zero for one texture, would likley also minimize the loss for other textures too, and therefore that there is an optimal set of hyperparameters.   
+It showed  a positive, linear correlation, meaning that as the set yielded a higher loss (a worse pattern) for the roundleaf texture, it would also yield a higher loss for the other textures, and vice versa. It was also interesting that each distribution had an increasing spread as the loss increased. This makes sense because as a set yields a less and less accurate result (increasing loss) for the roundleaf texture, there are more possibilities of textures to be generated which increases the range of possible outcomes for the other textures. Finally, even with only ten samples, each of the relationships seemed to have a y-intercept of approximately 0. This is notable because it suggests that a hyperparameter set that is extremely close to zero for one texture, would likely also minimize the loss for other textures too, and therefore that there is an optimal set of hyperparameters.   
 
 A next step for hyperparameter exploration in the algorithm is to find this optimal set by using an evolutionary strategy to evolve the parameters to the best combinations. 
 <br>
@@ -203,12 +203,12 @@ A next step for hyperparameter exploration in the algorithm is to find this opti
 **Project accomplishments**
 
 * Trained NCA models to generate reasonable facsimiles of biologically generated patterns. The application of NCA texture models to plant morphogenesis ties the modern tools of automatic differentiation and neural networks back to Turing's seminal work[^Turing1952], one of the founding works of mathematical biology.
-* Used random search to find reliable hyperparemeters that work on multiple target image textures.
+* Used random search to find reliable hyperparameters that work on multiple target image textures.
 * Explored using dimensionality reduction methods UMAP and PCA to generate good (and poor-performing) hyperparameters, but found these methods didn't fully capture the effect of hyperparameters (or predicted non-viable hyperparameters). If you would like to see these results yourself, or play around with these models and the data, [you can use this notebook I used](https://www.kaggle.com/code/tanishagerg/hyperparam-exploration-with-dim-reduction-d12210)
-* Combined with poor linear fits of individual hyperparameters to style loss, the observation that small perturbations in principal components about a high-performing P.C cluster suggests that the interaction between hyperparameters is likely synergistic and non-linear, and could be better captured with a non-linear model.
+* Combined with poor linear fits of individual hyperparameters to style loss, the observation that small perturbations in principal components about a high-performing P.C cluster suggests that the interaction between hyperparameters is likely synergistic and nonlinear, and could be better captured with a nonlinear model.
 
 **Ideas for future work**
-* Using non-linear PCA (neural network autoencoders) to capture non-linear interactions between and generate effective combinations of hyperparameters. 
+* Using nonlinear PCA (neural network autoencoders) to capture nonlinear interactions between and generate effective combinations of hyperparameters. 
 * Using evolution strategies to augment random search by updating hyperparameters distributions over multiple generations to find an optimal set of hyperparameters
 
 It was nice to see first-hand how well the SRNCA model can learn textures, even from pictures of random plants around my house. If you would like to do some hyperparameter exploration on this model yourself, you can use [this notebook that I used](https://www.kaggle.com/code/tanishagerg/srnca-textures/edit). 
