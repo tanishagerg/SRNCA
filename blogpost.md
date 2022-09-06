@@ -13,7 +13,7 @@ We see patterns in nature everywhere-  our fingerprints, plant textures such as 
 |<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="275" height="230"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="275" height="230"/>|
 |Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
 |<img src = "https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png" width="275" height="230"/>
-|Trout sklin pattern|Lichen growth|Maple leaf veins|
+|Trout skin pattern|Lichen growth|Maple leaf veins|
 
 
 
@@ -22,7 +22,7 @@ We see patterns in nature everywhere-  our fingerprints, plant textures such as 
 
 
 
-One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar to why an uncompressed tif file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
+One first guess at how animal and plant patterns arise would be that they are hard-coded in deterministic genes. That would mean every limb, tooth, and stripe corresponds exactly to its specific description in a gene. However, the information storage requirements for this approach would be massive: every cell would have to have the entire blueprint for the entire organism, similar to why an uncompressed TIF file (where every pixel is described exactly) takes so much storage. An “uncompressed genome” describing an animal or plant would be immense, and such an organism’s fitness would likely collapse under the energetic and information-processing needs of such a genome. 
 
 So what if the genomes could have a "compressed genome" instead? Similar to a compressed tif file, where the images are essentially stored as partial instructions for how to reconstruct the images based on decompression rules (the decompression algorithm here is the other half of the reconstruction instructions). Here is where we have a more viable explanation of organismal patterning and development:  encoding of rules for development (e.g. genes describing how to produce and react to a body landscape of diffusing morphogens). 
 
@@ -98,7 +98,8 @@ I conducted most of my trials on the round leaf eggs texture leaf with eggs laid
 <br>
 <br>
 <center> <h3> Distribution of final losses across different textures in 10 different random sets of hyperparameters: </h3> </center>
-  
+ 
+{:style="text-align:center;"}
 ![image](https://user-images.githubusercontent.com/103375681/182497556-3518b809-0342-4b0c-83e3-11ccf985c799.png)
 *Each set of hyperparameters was tested on each of the four textures and corresponds to a color. As shown, the roundleaf target image had the most variability.*
 <br>
@@ -118,12 +119,16 @@ Target image: roundleaf eggs
 |My rating: 2|My rating: 1|My rating: 0|
 
 Looking at 50 random textures that were trained to reach the roundleaf eggs texture, there was a pretty strong negative linear relationship between the final loss and my rating, which makes sense as a lower loss should mean a better pattern. It shows that the Gram matrix is quite effective at capturing the elements of style important to at least one human viewer.
+
+{:style="text-align:center;"}
 ![image](https://user-images.githubusercontent.com/103375681/182499610-6cabeeb2-1183-4573-9660-803626cacddf.png)
 <br>
 <br>
 <br>
 ## Relationships between parameter values and final output
 There didn’t seem to be any convincing linear relationships, however, between the hyperparameters and the final loss, as shown by these graphs of parameter values versus the loss:
+
+{:style="text-align:center;"}
 ![image](https://user-images.githubusercontent.com/103375681/182500467-d5598eb8-336f-40e0-96f1-b47474c3f031.png)
 
 So, I looked at clusters to see if certain combinations of hyperparameters near certain values result in specific outcomes. I tried both the Principal Component Analysis[^Pearson1901][^Hotelling1933] (PCA) model and the Uniform Manifold Approximation and Projection[^McInnes2018] (UMAP) model. The Umap model always gave me unviable results to try, such as negative values for model channels, but I tried some of the suggestions that the PCA model gave me. 
