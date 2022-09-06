@@ -13,7 +13,7 @@ We see patterns in nature everywhere-  our finger prints, plant textures such as
 |<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="225" height="200"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="225" height="200"/>|
 |Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
 |<img src = "https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png" width="225" height="200"/>
-
+|Trout sklin pattern|Lichen growth|Maple leaf veins|
 
 
 
