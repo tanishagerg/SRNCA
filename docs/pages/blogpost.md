@@ -172,7 +172,7 @@ For example, my fifth set yielded great results across the different target text
 |---|---|
 | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true)| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true)> |
 | roundleaf | orchid petal |
-| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif) |
+| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif?raw=true) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif?raw=true) |
 | alocasia | snake plant |
 
 ### Hyperparameter set 8
@@ -190,9 +190,9 @@ And my eight set yielded horrible results across the different target textures:
 
 | | |
 |---|---|
-|  ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif)  | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif) |
+|  ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif?raw=true)  | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif?raw=true) |
 | roundleaf | orchid petal |
-| ![image](https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif) |
+| ![image](https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif?raw=true) |
 | alocasia | snake plant |
 
 **At the end, I graphed the relationship between the roundleaf final loss versus other other textures' final losses for each of the ten sets of parameters.**
