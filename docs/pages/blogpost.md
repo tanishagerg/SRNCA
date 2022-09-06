@@ -5,14 +5,13 @@
 ## Introduction
 We see patterns in nature everywhere-  our fingerprints, plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
 
-{:style="text-align:center;"}
 | | | |
 | ------------- | ------------- | ------------- |
-|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="275" height="230"/>|
+|![B-Z reaction](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true)|![giraffe](https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png)|![Haworthia leaf](https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png)|
 |Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern[^Sutter2022]|Haworthia leaf pattern|
-|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="275" height="230"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="275" height="230"/>|
+|![pufferfish](https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png)|![Gasteria](https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png)|![zebra](https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)|
 |Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
-|<img src = "https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png" width="275" height="230"/>|<img src = "https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png" width="275" height="230"/>
+|![Trout skin](https://user-images.githubusercontent.com/103375681/188747518-6872a2e9-31f1-45ad-be97-b29b06306b78.png) |![Lichen](https://user-images.githubusercontent.com/103375681/188747647-c2cf2b25-0d28-4c1f-aade-f51a47823b8d.png)|![Maple leaf](https://user-images.githubusercontent.com/103375681/188747760-0667db2b-5a4b-4b5d-bbd7-90303bcaa862.png) 
 |Trout skin pattern|Lichen growth|Maple leaf veins|
 
 
@@ -90,7 +89,7 @@ I was interested in creating plant textures with this algorithm, so the target t
 
 |Roundleaf - Circular variegation from eggs laid on a maple leaf|Orchid Petal- Branching pigments on an orchid petal|Alocasia- Veins on the underside of an Alocasia leaf|Snake Plant- Striped variegation on a Snake Plant|
 | ------------- | ------------- | ------------- | ------------- |
-|<img src="https://user-images.githubusercontent.com/103375681/182497701-d9fb831d-5105-44ff-95e5-fe0cc097ad5a.png" />|<img src="https://user-images.githubusercontent.com/103375681/182497726-258800cf-225b-4276-9e7c-b41c144c9fbc.png" /> | <img src="https://user-images.githubusercontent.com/103375681/182497758-cd5479a6-8f84-4044-9651-0301c43e7a97.png" /> |<img src="https://user-images.githubusercontent.com/103375681/182497777-704412ef-3f93-44b9-9ffe-4c932a73324a.png"  />|
+|![image](https://user-images.githubusercontent.com/103375681/182497701-d9fb831d-5105-44ff-95e5-fe0cc097ad5a.png)|![image](https://user-images.githubusercontent.com/103375681/182497726-258800cf-225b-4276-9e7c-b41c144c9fbc.png) | ![image](https://user-images.githubusercontent.com/103375681/182497758-cd5479a6-8f84-4044-9651-0301c43e7a97.png) |![image](https://user-images.githubusercontent.com/103375681/182497777-704412ef-3f93-44b9-9ffe-4c932a73324a.png)|
 
 
 I conducted most of my trials on the round leaf eggs texture leaf with eggs laid on it. What made this a great training image was that, out of these four textures, it had the highest variability in the final loss, the loss at step 16383. The loss usually ranged anywhere from .5 to 5. A higher variability of outcomes from the same parameters makes it easier to pinpoint specific trends because the data is more spread out. 
@@ -111,6 +110,7 @@ Firstly, apart from the hyperparameters themselves, I wanted to see how well the
 
 Here are some examples of generated textures and how I decided to score them:
 Target image: roundleaf eggs 
+
 | | | |
 | ------------- | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182499254-a546525d-0dfc-491e-841d-00cb0b67f9fb.png)|![image](https://user-images.githubusercontent.com/103375681/182499269-fec905b3-cb2b-45ab-acf1-b1354add8f10.png)|![image](https://user-images.githubusercontent.com/103375681/182499281-2b421ef9-ca5d-4774-ade5-2ab5b9167a2a.png)|
@@ -136,6 +136,7 @@ So, I looked at clusters to see if certain combinations of hyperparameters near 
 Although my sample size was only two, it seemed that the PCA model worked pretty well for finding a combination of parameters that generated a “good” pattern with a mean rating of 4.4:
 
 *From mean rating 4.4:*
+
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182500958-d2b34b30-8639-41a7-8989-320a7ad6880f.png)|![image](https://user-images.githubusercontent.com/103375681/182500973-f7f19deb-1d35-4f59-a134-5dff295b2887.png)|
@@ -143,6 +144,7 @@ Although my sample size was only two, it seemed that the PCA model worked pretty
 But, not so much for generating a “bad” pattern with a mean resting of .5. However, these textures do certainly appear to not be as great as the ones from the mean rating of 4.4:
 
 *From mean rating .5:*
+
 | | |
 | ------------- | ------------- |
 |![image](https://user-images.githubusercontent.com/103375681/182501297-1d2a05de-7b72-44fd-b1e9-dcf4bc1670a3.png)|![image](https://user-images.githubusercontent.com/103375681/182501320-3f15e2a9-c910-43c9-99a7-cc2566ff3689.png)|
@@ -168,9 +170,9 @@ For example, my fifth set yielded great results across the different target text
 
 | | |
 |---|---|
-| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true" width="300" height="300"/>| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true" width="300" height="300" /> |
+| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/rounleaf10trials5.gif?raw=true)| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal5.gif?raw=true)> |
 | roundleaf | orchid petal |
-| <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif" width="300" height="300" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif" width="300" height="300" /> |
+| ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/alocasia10trials5.gif) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials5.gif) |
 | alocasia | snake plant |
 
 ### Hyperparameter set 8
@@ -188,9 +190,9 @@ And my eight set yielded horrible results across the different target textures:
 
 | | |
 |---|---|
-|  <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif" width="300" height="300" />  | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif" width="300" height="300" /> |
+|  ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/roundleaftrial8.gif)  | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/orchidpetal8.gif) |
 | roundleaf | orchid petal |
-| <img src="https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif" width="300" height="300" /> | <img src="https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif" width="300" height="300" /> |
+| ![image](https://user-images.githubusercontent.com/103375681/185519826-b06a6c17-bb6b-44e5-998b-75d53cf91d77.gif) | ![image](https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/snakeplant110trials8.gif) |
 | alocasia | snake plant |
 
 **At the end, I graphed the relationship between the roundleaf final loss versus other other textures' final losses for each of the ten sets of parameters.**
