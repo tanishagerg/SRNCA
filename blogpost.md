@@ -4,11 +4,13 @@
 
 ## Introduction
 We see patterns in nature everywhere-  our finger prints, plant textures such as variegation, disease, and veins, animal patterns like tiger stripes and pufferfish skin, and in chemical reactions like the rings and spirals of the oscillating Belousov-Zhabotinsky reaction, to name just a few. But how do they occur? In other words, what makes these patterns arise the way they do? 
+
+{:style="text-align:center;"}
 | | | |
 | ------------- | ------------- | ------------- |
-|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="400" height="300"/>|
+|<img src = "https://github.com/tanishagerg/SRNCA/blob/master/blogpostgifs/8wMA.gif?raw=true" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182692154-16768a5a-6587-4328-93f5-7eb73f71e415.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697402-d0218dd3-fdf2-402a-ae4f-fd5e26494bf9.png" width="225" height="200"/>|
 |Belousov-Zhabotinsky reaction[^Kench2011]|Giraffe fur pattern[^Sutter2022]|Haworthia leaf pattern|
-|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="400" height="300"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="400" height="300"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="400" height="300"/>|
+|<img src = "https://user-images.githubusercontent.com/103375681/182706291-569bc34e-f8bb-4607-ad91-e76d29581ad8.png" width="225" height="200"/>|<img src = "https://user-images.githubusercontent.com/103375681/182697757-0dd3c27b-6ad7-4c27-b818-b72b8cb2cd9b.png" width="225" height="200"/>|<img src = "https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" width="225" height="200"/>|
 |Pufferfish skin pattern[^Dato-on]|Gasteria leaf pattern|Zebra fur pattern[^Anonymous2017]|
 
 <!-- ![image](https://images.pexels.com/photos/70376/animals-zebra-zebra-crossing-stripes-70376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) -->
@@ -33,7 +35,7 @@ I worked with a similar implementation Niklasson et al's, called the the Symboli
 
 1. First, the  NCA model generates a texture by iteratively applying its neural layer operations to an image grid
 
-2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (we used VGG16), which, in short, extracts features using multiple layers of convolutions, and stores these features as vectors. 
+2. Next, the final texture image is used as input to a pre-trained convolutional neural network layer (conv-net) (we used VGG16), which, in short, extracts features (such as vertical edges, horizontal edges, and points) using multiple layers of convolutions, and stores these features as vectors. 
 
 3. Next, a Gram matrix is calculated for several layers of the conv-net, which allows us to see how these vectors are correlated. A Gram matrix stores the dot product (the product a vector with the other vector's transpose, which measures how close they are) for every possible pair of vectors in each layer. We can write the value for the Gram matrix element at position (i,j) as
 
@@ -50,7 +52,7 @@ where the angle brackets and the dot are different ways of specifying the inner 
 
 4. At the same time as steps 2 and 3 for the training image, the target texture image (the image that the model is trying to make a similar pattern to) is also used directly as input to the conv-net model, and Gram matrices are calculated for the target image. 
 
-5. Finally, from the Gram Matrices from both the training image and the target texture image, the style loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss gives us a rating of the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison.
+5. Finally, from the Gram Matrices from both the training image and the target texture image, the style loss is calculated: which is the mean squared error between the Gram matrices for the target image and the training image. This loss gives us a rating of the difference in textures, or style, (as parsed in the hidden layer features of the convolutional neural network) of an image rather than a direct pixel-by-pixel comparison. Again, the loss is used to update the NCA to repeat this entire process again and again to learn the texture. 
 
 You can visualize this process in this diagram: 
 ![image](https://user-images.githubusercontent.com/103375681/185493138-78487dd7-30a1-4a20-bd2b-2fddb1fde322.png)
